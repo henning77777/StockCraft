@@ -53,7 +53,7 @@ public class ids
 							int start = 0;
 							int end = 9;
 							int maxpage = 0;
-							maxpage = idlist.length / 10 + 1;
+							maxpage = (idlist.length) / 10 + 1;
 							boolean symbol = false;
 							boolean page = false;
 							if(split.length > 1)
@@ -100,7 +100,7 @@ public class ids
 								player.sendMessage(ChatColor.GREEN+"--- stock ids -> page "+ChatColor.LIGHT_PURPLE+"1"+ChatColor.GREEN+" / "+maxpage+" ---");
 							}
 							String[] gtext = StockCraftDatabase.getcourse(idlist);
-							for(int i = start;i<idlist.length && i < end;i++)
+							for(int i = start;i<idlist.length && i <= end;i++)
 							{
 								course = gtext[i];
 								if(symbol)
