@@ -16,11 +16,11 @@ import com.mysql.jdbc.Statement;
 
 public class ids
  {
-	public static void idscommand(Player player,String [] split)
+	public static void idscommand(Player player,String [] split) throws SQLException
 	{
 		if(StockCraftPropertiesVar.perm == false ||  StockCraftPermissions.getInstance().ids(player))
 		{
-			Statement statement = (Statement) StockCraftDatabase.connect();
+			Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 			if(statement != null)
 			{
 				ResultSet resultset = null;

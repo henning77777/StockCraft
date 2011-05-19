@@ -30,16 +30,12 @@ public class StockCraft extends JavaPlugin {
     private Permissions permissions;
     private final String name = "StockCraft";
     public static final Logger log = Logger.getLogger("Minecraft");
-<<<<<<< HEAD
-
-=======
->>>>>>> d687cfc... Version 0.2
-    
-
     public void onEnable() {
     	StockCraftPropertiesVar.loadMain();
     	
-    	Statement statement = (Statement) StockCraftDatabase.connect();
+    	StockCraftDatabase.connecting();
+    	Statement statement = null;
+ 
 		if(statement != null)
 		{
 			try {
@@ -113,9 +109,4 @@ public class StockCraft extends JavaPlugin {
 	 public Permissions getPermissions() {
 	    return permissions;
 	 }
-<<<<<<< HEAD
-	 
-	
-=======
->>>>>>> d687cfc... Version 0.2
 }

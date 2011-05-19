@@ -19,8 +19,10 @@ import org.bukkit.entity.Player;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
+
 public class StockCraftDatabase {
 	
+	public static Connection conn;
 	private static StockCraft plugin;
 	public StockCraftDatabase(StockCraft instance) {
     	plugin = instance;
@@ -33,16 +35,14 @@ public class StockCraftDatabase {
     	return instance;
     }
 	
-	public static Statement connect() {
+	public static Connection connecting() {
 		try{
-			Connection conn = null;
 			Class.forName("com.mysql.jdbc.Driver").newInstance ();
-			conn = (Connection) DriverManager.getConnection(StockCraftPropertiesVar.url, StockCraftPropertiesVar.user, StockCraftPropertiesVar.pass);	
-			Statement statement = (Statement) conn.createStatement();
-			return statement;
+			conn = (Connection) DriverManager.getConnection(StockCraftPropertiesVar.url, StockCraftPropertiesVar.user, StockCraftPropertiesVar.pass);
+			return conn;
 		}
-		catch (Exception e) {			
-			e.printStackTrace(System.out);
+		catch (Exception e) {
+			e.printStackTrace(System.out);	
 			return null;
 		}
 	}
@@ -116,13 +116,13 @@ public class StockCraftDatabase {
 		String[] gtext = text.split(",");
 		return gtext;
 	}
-	public static void idadd(Player player, String idlong, String idshort)
+	public static void idadd(Player player, String idlong, String idshort) throws SQLException
 	{
 		String[] gtext = StockCraftDatabase.getcourse(idshort);
 		String course = gtext[1];
 		if(Float.valueOf(course) > 0)
 		{
-			Statement statement = (Statement) StockCraftDatabase.connect();
+			Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 			if(statement != null)
 			{	
 				ResultSet resultset = null;

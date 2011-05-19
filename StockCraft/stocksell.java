@@ -7,6 +7,7 @@
 package StockCraft;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -15,7 +16,7 @@ import com.mysql.jdbc.Statement;
 
 public class stocksell
  {
-	public static void stocksellcommand(Player player,String [] split)
+	public static void stocksellcommand(Player player,String [] split) throws SQLException
 	{
 		if(StockCraftPropertiesVar.perm == false ||  StockCraftPermissions.getInstance().stocksell(player))
 		{
@@ -31,7 +32,7 @@ public class stocksell
 			float allprofit = 0;
 			float price = (iamount * fcourse);
 			
-			Statement statement = (Statement) StockCraftDatabase.connect();
+			Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 			if(statement != null && id!=null)
 			{
 				ResultSet resultset = null;

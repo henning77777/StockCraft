@@ -18,10 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
 
 import com.mysql.jdbc.Statement;
-<<<<<<< HEAD
-=======
 import com.nijiko.coelho.iConomy.iConomy;
->>>>>>> d687cfc... Version 0.2
 
 
 public class StockCraftCommands {
@@ -39,9 +36,9 @@ public class StockCraftCommands {
     	return instance;
     }
 	
-	public static String idchange(String longid){
+	public static String idchange(String longid) throws SQLException{
 		String shortid = null;
-		Statement statement = (Statement) StockCraftDatabase.connect();
+		Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 		if(statement != null){
 			ResultSet resultset = null;
 			String sql = "SELECT shortid FROM idtable WHERE longid ='"+longid+"'";
@@ -138,9 +135,9 @@ public class StockCraftCommands {
         	log.log(Level.SEVERE, "There is no file "+loc+"!", e);        	    
         	}
         }
-	public static String idback(String shortid){
+	public static String idback(String shortid) throws SQLException{
 		String longid = null;
-		Statement statement = (Statement) StockCraftDatabase.connect();
+		Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 		if(statement != null){
 			ResultSet resultset = null;
 			String sql = "SELECT longid FROM idtable WHERE shortid ='"+shortid+"'";
@@ -160,7 +157,7 @@ public class StockCraftCommands {
 	
 	
 	
-	public void infosystem(String[] split, Player player, PlayerChatEvent event){
+	public void infosystem(String[] split, Player player, PlayerChatEvent event) throws SQLException{
 		
 		if(split[0].equalsIgnoreCase("/course")) {
 			event.setCancelled(true); 
@@ -183,7 +180,7 @@ public class StockCraftCommands {
 			event.setCancelled(true); 
 			if(StockCraftPropertiesVar.perm == false ||  StockCraftPermissions.getInstance().stocks(player))
 			{
-				Statement statement = (Statement) StockCraftDatabase.connect();
+				Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 				if(statement != null)
 				{
 					ResultSet resultset = null;
@@ -270,12 +267,10 @@ public class StockCraftCommands {
 		}
 		if(split[0].equalsIgnoreCase("/ids")) {
 			event.setCancelled(true); 
-<<<<<<< HEAD
 			ids.idscommand(player, split);
-=======
 			if(StockCraftPropertiesVar.perm == false ||  StockCraftPermissions.getInstance().ids(player))
 			{
-				Statement statement = (Statement) StockCraftDatabase.connect();
+				Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 				if(statement != null)
 				{
 					ResultSet resultset = null;
@@ -327,14 +322,11 @@ public class StockCraftCommands {
 			else{
 				player.sendMessage(ChatColor.RED+"You don't have permission!");
 			}
->>>>>>> d687cfc... Version 0.2
 				
 		}
 		if(split[0].equalsIgnoreCase("/stocksell")) {
 			event.setCancelled(true);
-<<<<<<< HEAD
 			stocksell.stocksellcommand(player, split);			
-=======
 			if(StockCraftPropertiesVar.perm == false ||  StockCraftPermissions.getInstance().stocksell(player))
 			{
 				String amount = "1";
@@ -349,7 +341,7 @@ public class StockCraftCommands {
 				float allprofit = 0;
 				float price = (iamount * fcourse);
 				
-				Statement statement = (Statement) StockCraftDatabase.connect();
+				Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 				if(statement != null && id!=null && price <= iConomy.getBank().getAccount(player.getName()).getBalance())
 				{
 					ResultSet resultset = null;
@@ -446,14 +438,13 @@ public class StockCraftCommands {
 				player.sendMessage(ChatColor.RED+"You don't have permission!");
 			}
 			
->>>>>>> d687cfc... Version 0.2
 		}
 		
 		if(split[0].equalsIgnoreCase("/stockbuy")) {
 			event.setCancelled(true); 
-<<<<<<< HEAD
+
 			stockbuy.stockbuycommand(player, split);				
-=======
+
 			if(StockCraftPropertiesVar.perm == false ||  StockCraftPermissions.getInstance().stockbuy(player))
 			{
 				String amount = "1";			
@@ -471,7 +462,7 @@ public class StockCraftCommands {
 				
 				if(id!=null)
 				{
-					Statement statement = (Statement) StockCraftDatabase.connect();
+					Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 					if(statement != null)
 					{					
 						ResultSet resultset = null;
@@ -566,7 +557,6 @@ public class StockCraftCommands {
 			else{
 				player.sendMessage(ChatColor.RED+"You don't have permission!");
 			}			
->>>>>>> d687cfc... Version 0.2
 		}
 		if(split[0].equalsIgnoreCase("/addid")) {
 			event.setCancelled(true); 
@@ -610,7 +600,7 @@ public class StockCraftCommands {
 			event.setCancelled(true); 
 			if(StockCraftPermissions.getInstance().removeid(player)){		
 				if(split.length > 1){
-					Statement statement = (Statement) StockCraftDatabase.connect();
+					Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 					if(statement != null)
 					{	
 						try {
@@ -656,7 +646,7 @@ public class StockCraftCommands {
     		event.setCancelled(true);
     		if(StockCraftPropertiesVar.perm == false ||  StockCraftPermissions.getInstance().stocktop(player))
 			{
-	    		Statement statement = (Statement) StockCraftDatabase.connect();
+    			Statement statement = (Statement) StockCraftDatabase.conn.createStatement();
 	    		if(statement != null)
 				{	
 					try {

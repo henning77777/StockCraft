@@ -42,7 +42,6 @@ public class StockCraftProperties extends Properties{
 		put(key, value ? "true" : "false");
 		return value;
 	}
-<<<<<<< HEAD
 	public double getDouble(String key, double value) {
 		if (containsKey(key)) {
 			return Double.parseDouble(getProperty(key));
@@ -51,8 +50,6 @@ public class StockCraftProperties extends Properties{
 		put(key, String.valueOf(value));
 		return value;
 	}
-=======
->>>>>>> d687cfc... Version 0.2
 	
 	
 }

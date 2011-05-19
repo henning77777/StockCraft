@@ -6,6 +6,8 @@
 
 package StockCraft;
 
+import java.sql.SQLException;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerListener;
@@ -22,7 +24,12 @@ public class StockCraftPlayerListener extends PlayerListener {
     	Player player = event.getPlayer();
     	String[] split = event.getMessage().split(" ");
     	//Check if the command is an mcMMO related help command
-    	StockCraftCommands.getInstance().infosystem(split, player, event);
+    	try {
+			StockCraftCommands.getInstance().infosystem(split, player, event);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 
